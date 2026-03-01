@@ -48,4 +48,17 @@ public class AdminUserController {
     }
 
     
+
+    @Operation(summary = "Get List Users", description = "Lấy danh sách User có lọc nâng cao")
+    @GetMapping
+    public ResponseEntity<Page<UserResponse>> getAllUsers(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) UserStatus status,
+            @RequestParam(required = false) Boolean isShopOwner,
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
+    )
+    {
+        return ResponseEntity.ok(userService.getAllUsers(keyword, status, isShopOwner, pageable));
+    }
 }
+

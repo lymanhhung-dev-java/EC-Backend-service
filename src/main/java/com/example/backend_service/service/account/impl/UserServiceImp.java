@@ -1,5 +1,8 @@
 package com.example.backend_service.service.account.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -7,9 +10,11 @@ import com.example.backend_service.commom.UserStatus;
 import com.example.backend_service.dto.request.account.ChangePasswordRequest;
 import com.example.backend_service.dto.request.account.UpdateProfileRequest;
 import com.example.backend_service.dto.response.account.ProfileResponse;
+import com.example.backend_service.dto.response.account.UserResponse;
 import com.example.backend_service.exception.AppException;
 import com.example.backend_service.model.auth.User;
 import com.example.backend_service.repository.UserRepository;
+import com.example.backend_service.repository.specification.UserSpecification;
 import com.example.backend_service.service.account.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -79,6 +84,18 @@ public class UserServiceImp implements UserService {
         userRepository.save(user);
         
         log.info("Đã cập nhật trạng thái user ID {} thành {}", userId, status);
+
+    }
+
+    @Override
+    public Page<UserResponse> getAllUsers(String keyword, UserStatus status, Boolean isShopOwner, Pageable pageable) {
+         Specification<User> spec = Specification.where(UserSpecification.hasKeyword(keyword))
+                .and(UserSpecification.hasStatus(status))
+                .and(UserSpecification.isShopOwner(isShopOwner));
+
+        return userRepository.findAll(spec, pageable)
+                .map(UserResponse::fromEntity);
     }
     
 }
+
