@@ -1,7 +1,9 @@
 package com.example.backend_service.service.account.impl;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.backend_service.dto.request.account.ChangePasswordRequest;
 import com.example.backend_service.dto.request.account.UpdateProfileRequest;
 import com.example.backend_service.dto.response.account.ProfileResponse;
 import com.example.backend_service.exception.AppException;
@@ -16,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j(topic = "USER-SERVICE")
 public class UserServiceImp implements UserService {
+     private final PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
     @Override
@@ -50,6 +53,21 @@ public class UserServiceImp implements UserService {
 
         User updatedUser = userRepository.save(user);
         return ProfileResponse.fromUser(updatedUser);
+    }
+
+    @Override
+    public void changePassword(String currentUsername, ChangePasswordRequest req) {
+        User user = getUserByUsername(currentUsername);
+
+        if (!req.getNewPassword().equals(req.getConfirmPassword())) {
+            throw new AppException("Confirmation password does not match");
+        }
+
+        if (!passwordEncoder.matches(req.getOldPassword(), user.getPassword())) {
+            throw new AppException("Incorrect old password");
+        }
+        user.setPassword(passwordEncoder.encode(req.getNewPassword()));
+        userRepository.save(user);
     }
     
 }
