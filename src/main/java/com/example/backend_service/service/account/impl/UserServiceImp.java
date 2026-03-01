@@ -2,12 +2,13 @@ package com.example.backend_service.service.account.impl;
 
 import org.springframework.stereotype.Service;
 
+import com.example.backend_service.dto.request.account.UpdateProfileRequest;
 import com.example.backend_service.dto.response.account.ProfileResponse;
 import com.example.backend_service.exception.AppException;
 import com.example.backend_service.model.auth.User;
 import com.example.backend_service.repository.UserRepository;
 import com.example.backend_service.service.account.UserService;
-
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +31,25 @@ public class UserServiceImp implements UserService {
             throw new AppException("User not found");
         }
         return user;
+    }
+
+    @Override
+    @Transactional
+    public ProfileResponse updateProfile(String currentUsername, UpdateProfileRequest req) {
+        User user = getUserByUsername(currentUsername);
+
+        if (req.getFullName() != null && !req.getFullName().isBlank()) {
+            user.setFullName(req.getFullName());
+        }
+        if (req.getPhoneNumber() != null && !req.getPhoneNumber().isBlank()) {
+            user.setPhoneNumber(req.getPhoneNumber());
+        }
+        if (req.getAvatarUrl() != null && !req.getAvatarUrl().isBlank()) {
+            user.setAvatarUrl(req.getAvatarUrl());
+        }
+
+        User updatedUser = userRepository.save(user);
+        return ProfileResponse.fromUser(updatedUser);
     }
     
 }
