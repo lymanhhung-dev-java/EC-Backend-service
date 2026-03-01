@@ -1,11 +1,14 @@
 package com.example.backend_service.service.account.impl;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.backend_service.commom.UserStatus;
 import com.example.backend_service.dto.request.account.ChangePasswordRequest;
 import com.example.backend_service.dto.request.account.UpdateProfileRequest;
 import com.example.backend_service.dto.response.account.ProfileResponse;
+import com.example.backend_service.dto.response.account.UserResponse;
 import com.example.backend_service.exception.AppException;
 import com.example.backend_service.model.auth.User;
 import com.example.backend_service.repository.UserRepository;
@@ -68,6 +71,17 @@ public class UserServiceImp implements UserService {
         }
         user.setPassword(passwordEncoder.encode(req.getNewPassword()));
         userRepository.save(user);
+    }
+
+    @Override
+    public Page<UserResponse> getAllUsers(String keyword, UserStatus status, Boolean isShopOwner, Pageable pageable) {
+
+        Specification<User> spec = Specification.where(UserSpecification.hasKeyword(keyword))
+                .and(UserSpecification.hasStatus(status))
+                .and(UserSpecification.isShopOwner(isShopOwner));
+
+        return userRepository.findAll(spec, pageable)
+                .map(UserResponse::fromEntity);
     }
     
 }
