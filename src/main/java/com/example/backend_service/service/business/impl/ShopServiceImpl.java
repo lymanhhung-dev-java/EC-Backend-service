@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.backend_service.commom.ShopStatus;
 import com.example.backend_service.dto.response.business.ShopResponse;
+import com.example.backend_service.exception.AppException;
+import com.example.backend_service.model.business.Shop;
 import com.example.backend_service.repository.ShopRepository;
 import com.example.backend_service.service.business.ShopService;
 
@@ -22,6 +24,25 @@ public class ShopServiceImpl implements ShopService{
     public Page<ShopResponse> getShopsForAdmin(String keyword, ShopStatus status, Pageable pageable) {
         return shopRepository.findAllByKeywordAndStatus(keyword, status, pageable)
                 .map(ShopResponse::fromEntity);
+    }
+
+    @Override
+    public void approveShope(Long shopId, Boolean isApproved) {
+
+        Shop shop = shopRepository.findById(shopId)
+                .orElseThrow(() -> new AppException("Shop không tồn tại!"));
+        if (isApproved) {
+            shop.setStatus(ShopStatus.ACTIVE);
+            User owner = shop.getOwner();
+            Role sellerRole = roleRepository.findByName("SELLER")
+                    .orElseThrow(() -> new AppException("Role SELLER not found"));
+            owner.getRoles().add(sellerRole);
+            userRepository.save(owner);
+
+        } else {
+            shop.setStatus(ShopStatus.REJECTED);
+        }
+        shopRepository.save(shop);
     }
     
 }

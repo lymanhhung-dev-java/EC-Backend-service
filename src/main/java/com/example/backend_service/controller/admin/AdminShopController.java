@@ -34,7 +34,13 @@ import org.springframework.data.domain.Sort;
 public class AdminShopController {
 
     private final ShopService shopService;
-
+    
+    @Operation(summary = "Approve Shop", description = "Approve or reject a shop")
+    @PutMapping("/{shopId}/approve")
+    public ResponseEntity<?> approveShop(@PathVariable Long shopId, @RequestParam Boolean isApproved){
+        shopService.approveShope(shopId, isApproved);
+        return ResponseEntity.ok(isApproved ? "Shop đã được phê duyệt" : "Shop đã bị từ chối");
+    }
 
     @Operation(summary = "Get All Shops", description = "Lấy danh sách shop (có search & filter)")
     @GetMapping
