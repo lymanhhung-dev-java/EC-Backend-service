@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.backend_service.dto.response.account.ProfileResponse;
 import com.example.backend_service.service.account.UserService;
-
+import com.example.backend_service.dto.request.account.ChangePasswordRequest;
 import com.example.backend_service.dto.request.account.UpdateProfileRequest;
 
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,6 +43,15 @@ public class ProfileController {
          String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
          log.info("Request update profile for user: {}", currentUsername);
          return ResponseEntity.ok(userService.updateProfile(currentUsername, req));
+    }
+
+    @Operation(summary = "Change Password", description = "Đổi mật khẩu (Cần mật khẩu cũ)")
+    @PutMapping("/change-password")
+    public ResponseEntity<String> changePassword(@RequestBody @Valid ChangePasswordRequest req){
+        String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info("Request change password for user: {}", currentUsername);
+        userService.changePassword(currentUsername, req);
+        return ResponseEntity.ok("Đổi mật khẩu thành công");
     }
 
 }
