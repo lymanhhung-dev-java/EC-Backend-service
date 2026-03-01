@@ -3,6 +3,7 @@ package com.example.backend_service.service.account.impl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.backend_service.commom.UserStatus;
 import com.example.backend_service.dto.request.account.ChangePasswordRequest;
 import com.example.backend_service.dto.request.account.UpdateProfileRequest;
 import com.example.backend_service.dto.response.account.ProfileResponse;
@@ -68,6 +69,16 @@ public class UserServiceImp implements UserService {
         }
         user.setPassword(passwordEncoder.encode(req.getNewPassword()));
         userRepository.save(user);
+    }
+    @Override
+    @Transactional
+    public void updateUserStatus(Long userId, UserStatus status) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new AppException("Người dùng không tồn tại"));
+        user.setStatus(status);
+        userRepository.save(user);
+        
+        log.info("Đã cập nhật trạng thái user ID {} thành {}", userId, status);
     }
     
 }
