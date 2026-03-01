@@ -34,7 +34,7 @@ import org.springframework.data.domain.Sort;
 public class AdminShopController {
 
     private final ShopService shopService;
-    
+
     @Operation(summary = "Approve Shop", description = "Approve or reject a shop")
     @PutMapping("/{shopId}/approve")
     public ResponseEntity<?> approveShop(@PathVariable Long shopId, @RequestParam Boolean isApproved){
@@ -52,6 +52,12 @@ public class AdminShopController {
         return ResponseEntity.ok(shopService.getShopsForAdmin(keyword, status, pageable));
     }
 
+    @Operation(summary = "Ban Shop", description = "Khóa shop do vi phạm (Không cho sửa lại)")
+    @PutMapping("/{id}/ban") 
+    public ResponseEntity<String> banShop(@PathVariable Long id) {
+        shopService.banShop(id);
+        return ResponseEntity.ok("Đã khóa Shop thành công");
+    }
     
 
 }

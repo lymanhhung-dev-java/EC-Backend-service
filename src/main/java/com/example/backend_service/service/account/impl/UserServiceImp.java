@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.backend_service.commom.ShopStatus;
 import com.example.backend_service.commom.UserStatus;
 import com.example.backend_service.dto.request.account.ChangePasswordRequest;
 import com.example.backend_service.dto.request.account.UpdateProfileRequest;
@@ -13,6 +14,7 @@ import com.example.backend_service.dto.response.account.ProfileResponse;
 import com.example.backend_service.dto.response.account.UserResponse;
 import com.example.backend_service.exception.AppException;
 import com.example.backend_service.model.auth.User;
+import com.example.backend_service.model.business.Shop;
 import com.example.backend_service.repository.UserRepository;
 import com.example.backend_service.repository.specification.UserSpecification;
 import com.example.backend_service.service.account.UserService;
@@ -95,6 +97,14 @@ public class UserServiceImp implements UserService {
 
         return userRepository.findAll(spec, pageable)
                 .map(UserResponse::fromEntity);
+    }
+
+    @Override
+    public void banShop(Long shopId) {
+        Shop shop = shopRepository.findById(shopId)
+                .orElseThrow(() -> new AppException("Shop không tồn tại"));
+        shop.setStatus(ShopStatus.BANNED);
+        shopRepository.save(shop);
     }
     
 }
