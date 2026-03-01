@@ -6,5 +6,5 @@ import com.example.backend_service.dto.response.account.ProfileResponse;
 
 public interface UserService {
     ProfileResponse getMyProfile(String currentUsername);
-   ProfileResponse updateProfile(String currentUsername, UpdateProfileRequest req);
+    ProfileResponse updateProfile(String currentUsername, UpdateProfileRequest req);
 }

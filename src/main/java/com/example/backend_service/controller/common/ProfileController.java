@@ -1,6 +1,5 @@
 package com.example.backend_service.controller.common;
 
-import org.jspecify.annotations.Nullable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +39,7 @@ public class ProfileController {
     
     @Operation(summary = "Update Profile", description = "Cập nhật tên, số điện thoại, avatar url")
     @PutMapping("/update")
-    public ResponseEntity<@Nullable Object> updateProfile(@RequestBody UpdateProfileRequest req) {
+    public ResponseEntity<ProfileResponse> updateProfile(@RequestBody UpdateProfileRequest req) {
          String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
          log.info("Request update profile for user: {}", currentUsername);
          return ResponseEntity.ok(userService.updateProfile(currentUsername, req));
