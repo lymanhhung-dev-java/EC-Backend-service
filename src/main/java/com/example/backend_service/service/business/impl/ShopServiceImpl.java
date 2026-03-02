@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 import com.example.backend_service.commom.ShopStatus;
 import com.example.backend_service.dto.response.business.ShopResponse;
 import com.example.backend_service.exception.AppException;
+import com.example.backend_service.model.auth.Role;
+import com.example.backend_service.model.auth.User;
 import com.example.backend_service.model.business.Shop;
+import com.example.backend_service.repository.RoleRepository;
 import com.example.backend_service.repository.ShopRepository;
+import com.example.backend_service.repository.UserRepository;
 import com.example.backend_service.service.business.ShopService;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +22,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j(topic = "SHOP-SERVICE")
 @RequiredArgsConstructor
 public class ShopServiceImpl implements ShopService{
+    final private UserRepository userRepository;
     private final ShopRepository shopRepository;
+    
+    private final RoleRepository roleRepository;
 
      @Override
     public Page<ShopResponse> getShopsForAdmin(String keyword, ShopStatus status, Pageable pageable) {
