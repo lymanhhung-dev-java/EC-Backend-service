@@ -14,5 +14,5 @@ public interface ShopService {
 
     Page<ShopResponse> getShopsForAdmin(String keyword, ShopStatus status, Pageable pageable);
     void approveShope(Long id, Boolean isApproved);
-
+    void banShop(Long shopId);
 }

@@ -42,6 +42,14 @@ public class AdminShopController {
         return ResponseEntity.ok(isApproved ? "Shop đã được phê duyệt" : "Shop đã bị từ chối");
     }
 
+    @Operation(summary = "Ban Shop", description = "Khóa shop do vi phạm (Không cho sửa lại)")
+    @PutMapping("/{id}/ban") 
+    public ResponseEntity<String> banShop(@PathVariable Long id) {
+        shopService.banShop(id);
+        return ResponseEntity.ok("Đã khóa Shop thành công");
+    }
+
+
     @Operation(summary = "Get All Shops", description = "Lấy danh sách shop (có search & filter)")
     @GetMapping
     public ResponseEntity<Page<ShopResponse>> getAllShops(

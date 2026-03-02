@@ -44,5 +44,13 @@ public class ShopServiceImpl implements ShopService{
         }
         shopRepository.save(shop);
     }
+
+    @Override
+    public void banShop(Long shopId) {
+        Shop shop = shopRepository.findById(shopId)
+                .orElseThrow(() -> new AppException("Shop không tồn tại"));
+        shop.setStatus(ShopStatus.BANNED);
+        shopRepository.save(shop);
+    }
     
 }
