@@ -106,8 +106,10 @@ public class AuthServiceImpl implements AuthService {
                     new UsernamePasswordAuthenticationToken(
                             loginRequest.getUsername(),
                             loginRequest.getPassword()));
-            log.info("Authorities: {}", authentication.getAuthorities().toString());
-            authorities.add(authentication.getAuthorities().toString());
+            log.info("Authorities: {}", authentication.getAuthorities());
+            authorities = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception e) {
             log.error("Authentication failed for user: {}", loginRequest.getUsername());
@@ -129,8 +131,9 @@ public class AuthServiceImpl implements AuthService {
             if (user == null) {
                 throw new AppException("User not found");
             }
-            List<String> authorities = new ArrayList<>();
-            authorities.add(user.getAuthorities().toString());
+            List<String> authorities = user.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
             String accessToken = jwtService.generateAccessToken(user.getUsername(), authorities);
             return TokenResponse.builder()
                     .accessToken(accessToken)

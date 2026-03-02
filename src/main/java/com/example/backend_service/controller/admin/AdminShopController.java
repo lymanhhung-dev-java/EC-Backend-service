@@ -27,7 +27,7 @@ import org.springframework.data.domain.Sort;
 
 @RestController
 @RequestMapping("/api/admin/shops")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @Slf4j(topic = "ADMIN-SHOP-CONTROLLER")
 @Tag(name = "Admin Shop Controller", description = "APIs for admin shop management")
 @RequiredArgsConstructor

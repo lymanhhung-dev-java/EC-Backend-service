@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/api/admin/categories")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @Slf4j(topic = "ADMIN-CATEGORY-CONTROLLER")
 @Tag(name = "Admin Category Controller", description = "APIs for admin category management")
 public class AdminCategoryController {

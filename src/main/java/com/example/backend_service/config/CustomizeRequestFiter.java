@@ -50,7 +50,7 @@ public class CustomizeRequestFiter extends OncePerRequestFilter {
                     
                     var roles = jwtService.extractRoles(token, TokenType.ACCESS_TOKEN);
                     var authorities = roles != null ? roles.stream()
-                            .map(role -> new SimpleGrantedAuthority(role.startsWith("ROLE_") ? role : "ROLE_" + role))
+                            .map(SimpleGrantedAuthority::new)
                             .collect(Collectors.toList()) : java.util.Collections.<org.springframework.security.core.GrantedAuthority>emptyList();
 
                     var authenticationToken = new UsernamePasswordAuthenticationToken(
