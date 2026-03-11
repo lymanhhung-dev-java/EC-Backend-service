@@ -1,4 +1,4 @@
-package com.example.backend_service.service.auth.impl;
+package com.example.backend_service.service.impl;
 
 import java.security.Key;
 import java.util.Date;
