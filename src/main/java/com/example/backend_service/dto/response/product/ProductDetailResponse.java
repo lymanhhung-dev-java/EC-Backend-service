@@ -46,7 +46,7 @@ public class ProductDetailResponse {
                 .updatedAt(p.getUpdatedAt())
                 .productImages(p.getImages().stream()
                         .map(ProductImage::getImageUrl)
-                        .collect(Collectors.toList()
+                        .collect(Collectors.toList()))
                 .build();
     }
 }
