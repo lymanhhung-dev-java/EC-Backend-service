@@ -1,7 +1,8 @@
 package com.example.backend_service.repository.specification;
 
 import org.springframework.data.jpa.domain.Specification;
-import com.example.backend_service.commom.UserStatus;
+
+import com.example.backend_service.common.UserStatus;
 import com.example.backend_service.model.auth.User;
 import jakarta.persistence.criteria.Predicate;
 

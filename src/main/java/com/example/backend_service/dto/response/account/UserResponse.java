@@ -1,8 +1,7 @@
 package com.example.backend_service.dto.response.account;
 
 import java.time.LocalDateTime;
-
-import com.example.backend_service.commom.UserStatus;
+import com.example.backend_service.common.UserStatus;
 import com.example.backend_service.model.auth.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

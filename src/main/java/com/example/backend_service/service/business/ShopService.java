@@ -3,7 +3,7 @@ package com.example.backend_service.service.business;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.example.backend_service.commom.ShopStatus;
+import com.example.backend_service.common.ShopStatus;
 import com.example.backend_service.dto.request.business.RegisterShopRequest;
 import com.example.backend_service.dto.response.business.ShopResponse;
 import com.example.backend_service.dto.response.business.UpdateShopRequest;

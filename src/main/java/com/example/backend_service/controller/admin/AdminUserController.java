@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend_service.commom.UserStatus;
+import com.example.backend_service.common.UserStatus;
 import com.example.backend_service.dto.response.account.UserResponse;
 import com.example.backend_service.service.account.UserService;
 

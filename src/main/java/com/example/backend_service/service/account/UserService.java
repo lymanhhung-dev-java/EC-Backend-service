@@ -3,7 +3,7 @@ package com.example.backend_service.service.account;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.example.backend_service.commom.UserStatus;
+import com.example.backend_service.common.UserStatus;
 import com.example.backend_service.dto.request.account.ChangePasswordRequest;
 import com.example.backend_service.dto.request.account.UpdateProfileRequest;
 import com.example.backend_service.dto.response.account.ProfileResponse;

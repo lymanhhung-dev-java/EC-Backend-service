@@ -1,4 +1,4 @@
-package com.example.backend_service.service.impl;
+package com.example.backend_service.service.auth.impl;
 
 import java.security.Key;
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.example.backend_service.commom.TokenType;
+import com.example.backend_service.common.TokenType;
 import com.example.backend_service.exception.AppException;
 import com.example.backend_service.service.auth.JwtService;
 

@@ -2,7 +2,7 @@ package com.example.backend_service.service.auth;
 
 import java.util.List;
 
-import com.example.backend_service.commom.TokenType;
+import com.example.backend_service.common.TokenType;
 
 
 public interface JwtService {

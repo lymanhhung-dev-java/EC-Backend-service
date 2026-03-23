@@ -1,4 +1,4 @@
-package com.example.backend_service.service.impl;
+package com.example.backend_service.service.auth.impl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import com.example.backend_service.commom.TokenType;
-import com.example.backend_service.commom.UserStatus;
+import com.example.backend_service.common.TokenType;
+import com.example.backend_service.common.UserStatus;
 import com.example.backend_service.dto.request.auth.LoginRequest;
 import com.example.backend_service.dto.request.auth.RegisterRequest;
 import com.example.backend_service.dto.request.auth.SocialLoginRequest;

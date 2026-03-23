@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
 
-import com.example.backend_service.commom.ShopStatus;
-import com.example.backend_service.commom.WithdrawalStatus;
+import com.example.backend_service.common.ShopStatus;
+import com.example.backend_service.common.WithdrawalStatus;
 import com.example.backend_service.dto.response.statistic.AdminDashboardResponse;
 import com.example.backend_service.repository.OrderRepository;
 import com.example.backend_service.repository.ShopRepository;

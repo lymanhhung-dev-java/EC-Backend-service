@@ -8,7 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.example.backend_service.commom.OrderStatus;
+import com.example.backend_service.common.OrderStatus;
 import com.example.backend_service.model.auth.User;
 import com.example.backend_service.model.business.Shop;
 

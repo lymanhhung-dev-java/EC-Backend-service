@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.example.backend_service.commom.TokenType;
+import com.example.backend_service.common.TokenType;
 import com.example.backend_service.service.auth.JwtService;
 import com.example.backend_service.service.auth.UserServiceDetail;
 

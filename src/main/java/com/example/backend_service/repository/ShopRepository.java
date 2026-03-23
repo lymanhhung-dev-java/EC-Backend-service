@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.example.backend_service.commom.ShopStatus;
+import com.example.backend_service.common.ShopStatus;
 import com.example.backend_service.model.auth.User;
 import com.example.backend_service.model.business.Shop;
 

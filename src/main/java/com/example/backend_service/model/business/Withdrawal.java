@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 
-import com.example.backend_service.commom.WithdrawalStatus;
+import com.example.backend_service.common.WithdrawalStatus;
 import com.example.backend_service.model.AbstractEntity;
 
 @Entity

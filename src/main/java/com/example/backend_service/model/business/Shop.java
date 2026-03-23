@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.example.backend_service.commom.ShopStatus;
+import com.example.backend_service.common.ShopStatus;
 import com.example.backend_service.model.AbstractEntity;
 import com.example.backend_service.model.auth.User;
 

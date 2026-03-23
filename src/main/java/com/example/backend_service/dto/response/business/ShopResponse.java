@@ -1,8 +1,7 @@
 package com.example.backend_service.dto.response.business;
 
 import java.time.LocalDateTime;
-
-import com.example.backend_service.commom.ShopStatus;
+import com.example.backend_service.common.ShopStatus;
 import com.example.backend_service.model.business.Shop;
 import lombok.Builder;
 import lombok.Data;

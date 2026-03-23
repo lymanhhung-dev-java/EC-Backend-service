@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.example.backend_service.commom.ShopStatus;
+import com.example.backend_service.common.ShopStatus;
 import com.example.backend_service.dto.response.business.ShopResponse;
 import com.example.backend_service.exception.AppException;
 import com.example.backend_service.model.auth.Role;

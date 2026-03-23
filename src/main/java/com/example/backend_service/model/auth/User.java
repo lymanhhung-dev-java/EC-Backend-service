@@ -8,7 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.example.backend_service.commom.UserStatus;
+import com.example.backend_service.common.UserStatus;
 import com.example.backend_service.model.AbstractEntity;
 import com.example.backend_service.model.business.Shop;
 

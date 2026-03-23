@@ -2,7 +2,7 @@ package com.example.backend_service.controller.admin;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend_service.commom.ShopStatus;
+import com.example.backend_service.common.ShopStatus;
 import com.example.backend_service.dto.response.business.ShopResponse;
 import com.example.backend_service.service.business.ShopService;
 

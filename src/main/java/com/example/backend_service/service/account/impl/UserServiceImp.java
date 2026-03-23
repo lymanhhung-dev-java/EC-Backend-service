@@ -6,7 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.backend_service.commom.UserStatus;
+import com.example.backend_service.common.UserStatus;
 import com.example.backend_service.dto.request.account.ChangePasswordRequest;
 import com.example.backend_service.dto.request.account.UpdateProfileRequest;
 import com.example.backend_service.dto.response.account.ProfileResponse;
