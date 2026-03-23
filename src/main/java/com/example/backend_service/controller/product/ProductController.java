@@ -11,7 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.backend_service.dto.response.product.ProductListResponse;
-import com.example.backend_service.service.product.impl.ProductService;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.backend_service.dto.response.product.ProductDetailResponse;
+import com.example.backend_service.dto.response.product.ProductListResponse;
+import com.example.backend_service.model.product.Product;
+import com.example.backend_service.service.product.ProductService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,4 +44,24 @@ public class ProductController {
         Page<ProductListResponse> response = productPage.map(ProductListResponse::fromEntity);
         return ResponseEntity.ok(response);
     }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProductDetail(@PathVariable Long id) {
+        Product product = productService.getProductById(id);
+        return ResponseEntity.ok(ProductDetailResponse.fromEntity(product));
+    }
+
+    @GetMapping("/shop/{shopId}")
+    public ResponseEntity<Page<ProductListResponse>> getProductsByShop(@PathVariable Long shopId,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) BigDecimal minPrice,
+            @RequestParam(required = false) BigDecimal maxPrice,
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        var productPage = productService.getProducts(search, categoryId, shopId, minPrice, maxPrice, pageable);
+        Page<ProductListResponse> response = productPage.map(ProductListResponse::fromEntity);
+        return ResponseEntity.ok(response);
+    }
 }
+
